@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+$(document).ready(function(){
+	$('.reim_table').DataTable();
+});

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1471009126269_1" label="College" name="College">
+<item elementID="=WHFSM1" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Draw" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=WHFWM" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1471009418750_2" label="ERS" name="ERS">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ERS" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/ERS_EAR" type="4"/>
+<item elementID="=ERS_Web" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1471009620760_4" label="JScript" name="JScript">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/JQueryDataTables" type="4"/>
+<item elementID="=PokeShop" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=JavaScriptEx" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=StreetFighter" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1471009679050_5" label="Web" name="Web">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/JSP" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/XML" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Servlet" type="4"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1471009935447_6" label="IMS" name="IMS">
+<item elementID="=IMS_WEB" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1429559713318_0" label="Window Working Set" name="Aggregate for window 1429559713313"/>
+<mruList name="College"/>
+<mruList name="ERS"/>
+</workingSetManager>

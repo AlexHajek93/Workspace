@@ -1,0 +1,609 @@
+package ers.dao;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import ers.beans.*;
+import ers.service.ServiceLocator;
+
+public class ErsDAO {
+	Connection conn;
+	static Properties columns;
+	static{
+		columns = new Properties();
+		try {
+			columns.load(ErsDAO.class.getClassLoader().getResourceAsStream("data.properties"));
+		} catch (IOException e) {e.printStackTrace();}
+	}
+	public ErsDAO(){
+		try{ 
+			conn = ServiceLocator.getDatabase().getConnection();
+			conn.setAutoCommit(false);
+		}
+		catch(Exception e){}
+	}
+	
+	@Override
+	protected void finalize() throws Throwable {
+		if(conn != null && !conn.isClosed()) conn.close();
+		super.finalize();
+	}
+	//Reimbursement feature calls
+	public boolean createReim(ErsReimbursement obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getAmount()==0||obj.getSubmitted()==null||
+					obj.getAuthor()==null||obj.getStatus()==null||obj.getType()==null){
+				System.out.println("Reimbursement Parameters are Invalid");
+				return false;
+			}
+//14 variants are technically available doing only basic one atm
+//			else if(obj.getDescription()!=null&&obj.getReceipt()!=null&&obj.getResolved()!=null&&obj.getResolver()!=null){
+//				
+//				return true;
+//			}
+			query = "INSERT INTO ERS_REIMBURSEMENT(REIMB_ID,REIMB_AMOUNT,REIMB_SUBMITTED,REIMB_AUTHOR,REIMB_STATUS_ID,REIMB_TYPE_ID) VALUES(?,?,?,?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, obj.getId());
+			pstmt.setInt(2, obj.getAmount());
+			pstmt.setDate(3, obj.getSubmitted());
+			pstmt.setInt(4, obj.getAuthor().getId());
+			pstmt.setInt(5, obj.getStatus().getId());
+			pstmt.setInt(6, obj.getType().getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+	public ErsReimbursement retrieveReim(int id){
+		try{
+			String query = "SELECT * FROM ERS_REIMBURSEMENT WHERE REIMB_ID = ?";
+			ResultSet rs;
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ErsReimbursement obj = new ErsReimbursement(
+						rs.getInt(columns.getProperty("reimId")),
+						rs.getInt(columns.getProperty("reimAmount")),
+						rs.getDate(columns.getProperty("reimSub")),
+						this.retrieveUser(rs.getInt(columns.getProperty("reimAuth"))),
+						this.retrieveStat(rs.getInt(columns.getProperty("reimSId"))),
+						this.retrieveType(rs.getInt(columns.getProperty("reimTId"))));
+				if(obj.getId()==id)return obj;
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	public boolean updateReim(ErsReimbursement obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getAmount()==0||obj.getSubmitted()==null||
+					obj.getAuthor()==null||obj.getStatus()==null||obj.getType()==null){
+				System.out.println("Reimbursement Parameters are Invalid");
+				return false;
+			}
+//14 variants are technically available doing only basic one atm
+//			else if(obj.getDescription()!=null&&obj.getReceipt()!=null&&obj.getResolved()!=null&&obj.getResolver()!=null){
+//				
+//				return true;
+//			}
+			query = "UPDATE ERS_REIMBURSEMENT SET REIMB_AMOUNT=?,REIMB_SUBMITTED=?,REIMB_AUTHOR=?,REIMB_STATUS_ID=?,REIMB_TYPE_ID=? WHERE REIMB_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, obj.getAmount());
+			pstmt.setDate(2, obj.getSubmitted());
+			pstmt.setInt(3, obj.getAuthor().getId());
+			pstmt.setInt(4, obj.getStatus().getId());
+			pstmt.setInt(5, obj.getType().getId());
+			pstmt.setInt(6, obj.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+	public boolean deleteReim(ErsReimbursement obj){throw new UnsupportedOperationException();}
+	public List<ErsReimbursement> getAllReims(){
+		List<ErsReimbursement> trackList = new ArrayList<ErsReimbursement>();
+		try {
+			String query = "SELECT * FROM ERS_REIMBURSEMENT";
+			ResultSet rs;
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);//run query
+			while(rs.next()){
+				ErsReimbursement obj = new ErsReimbursement(
+						rs.getInt(columns.getProperty("reimId")),
+						rs.getInt(columns.getProperty("reimAmount")),
+						rs.getDate(columns.getProperty("reimSub")),
+						this.retrieveUser(rs.getInt(columns.getProperty("reimAuth"))),
+						this.retrieveStat(rs.getInt(columns.getProperty("reimSId"))),
+						this.retrieveType(rs.getInt(columns.getProperty("reimTId"))));
+				System.out.println(obj);
+				trackList.add(obj);
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return trackList;
+	}
+	public List<ErsReimbursement> getAllReims(int id){
+		List<ErsReimbursement> trackList = new ArrayList<ErsReimbursement>();
+		try {		
+			String query = "SELECT * FROM ERS_REIMBURSEMENT WHERE REIMB_AUTHOR = ?";
+			ResultSet rs;
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+System.out.println("mid:"+id);
+			rs = pstmt.executeQuery(query);//run query
+System.out.println("Executed");
+			while(rs.next()){
+System.out.println("Found");
+				ErsReimbursement obj = new ErsReimbursement(
+						rs.getInt(columns.getProperty("reimId")),
+						rs.getInt(columns.getProperty("reimAmount")),
+						rs.getDate(columns.getProperty("reimSub")),
+						this.retrieveUser(rs.getInt(columns.getProperty("reimAuth"))),
+						this.retrieveStat(rs.getInt(columns.getProperty("reimSId"))),
+						this.retrieveType(rs.getInt(columns.getProperty("reimTId"))));
+				trackList.add(obj);
+System.out.println("Added");
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return trackList;
+	}
+	
+	//User feature calls
+	public boolean createUser(ErsUser obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getUsername()==null||obj.getPassword()==null
+					||obj.getFname()==null||obj.getLname()==null||obj.getEmail()==null||obj.getRole()==null){
+				System.out.println("User Parameters are Invalid");
+				return false;
+			}
+			query = "INSERT INTO ERS_USERS VALUES(?,?,?,?,?,?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, obj.getId());
+			pstmt.setString(2, obj.getUsername());
+			pstmt.setString(3, obj.getPassword());
+			pstmt.setString(4, obj.getFname());
+			pstmt.setString(5, obj.getLname());
+			pstmt.setString(6, obj.getEmail());
+			pstmt.setInt(7, obj.getRole().getRole());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+	public ErsUser retrieveUser(int id){
+		try{
+			String query = "SELECT * FROM ERS_USERS WHERE ERS_USERS_ID = ?";
+			ResultSet rs;
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ErsUser obj = new ErsUser(
+						rs.getInt(columns.getProperty("userId")),
+						rs.getString(columns.getProperty("username")),
+						rs.getString(columns.getProperty("userPass")),
+						rs.getString(columns.getProperty("userFName")),
+						rs.getString(columns.getProperty("userLName")),
+						rs.getString(columns.getProperty("userEmail")),
+						this.retrieveRole(rs.getInt(columns.getProperty("userRole"))));
+				if(obj.getId()==id)return obj;
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	public ErsUser retrieveUser(String user){
+		try{
+			String query = "SELECT * FROM ERS_USERS WHERE ERS_USERNAME = ?";
+			ResultSet rs;
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, user);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ErsUser obj = new ErsUser(
+						rs.getInt(columns.getProperty("userId")),
+						rs.getString(columns.getProperty("username")),
+						rs.getString(columns.getProperty("userPass")),
+						rs.getString(columns.getProperty("userFName")),
+						rs.getString(columns.getProperty("userLName")),
+						rs.getString(columns.getProperty("userEmail")),
+						this.retrieveRole(rs.getInt(columns.getProperty("userRole"))));
+				if(obj.getUsername().equals(user))return obj;
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	public boolean updateUser(ErsUser obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getUsername()==null||obj.getPassword()==null
+					||obj.getFname()==null||obj.getLname()==null||obj.getEmail()==null||obj.getRole()==null){
+				System.out.println("User Parameters are Invalid");
+				return false;
+			}
+			query = "UPDATE ERS_USERS SET ERS_USERNAME=?,ERS_PASSWORD=?,USER_FIRST_NAME=?,USER_LAST_NAME=?,USER_EMAIL=?,USER_ROLE_ID=? WHERE ERS_USERS_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, obj.getUsername());
+			pstmt.setString(2, obj.getPassword());
+			pstmt.setString(3, obj.getFname());
+			pstmt.setString(4, obj.getLname());
+			pstmt.setString(5, obj.getEmail());
+			pstmt.setInt(6, obj.getRole().getRole());
+			pstmt.setInt(7, obj.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}	
+	public boolean deleteUser(ErsUser obj){throw new UnsupportedOperationException();}
+	public List<ErsUser> getAllUsers(){
+		List<ErsUser> trackList = new ArrayList<ErsUser>();
+		try {
+			String query = "SELECT * FROM ERS_USERS";
+			ResultSet rs;
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while(rs.next()){
+				ErsUser obj = new ErsUser(
+						rs.getInt(columns.getProperty("userId")),
+						rs.getString(columns.getProperty("username")),
+						rs.getString(columns.getProperty("userPass")),
+						rs.getString(columns.getProperty("userFName")),
+						rs.getString(columns.getProperty("userLName")),
+						rs.getString(columns.getProperty("userEmail")),
+						this.retrieveRole(rs.getInt(columns.getProperty("userRole"))));
+				trackList.add(obj);
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return trackList;
+	}
+	//Role feature calls
+	public boolean createRole(ErsRole obj){
+		try {
+			String query;
+			if(obj.getRole()==0||obj.getTitle()==null){
+				System.out.println("Role Parameters are Invalid");
+				return false;
+			}
+			query = "INSERT INTO ERS_USER_ROLES VALUES(?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, obj.getRole());
+			pstmt.setString(2, obj.getTitle());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+	public ErsRole retrieveRole(int id){
+		try{
+			String query = "SELECT * FROM ERS_USER_ROLES WHERE ERS_USER_ROLE_ID = ?";
+			ResultSet rs;
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ErsRole obj = new ErsRole(
+						rs.getInt(columns.getProperty("roleId")),
+						rs.getString(columns.getProperty("roleName")));
+				if(obj.getRole()==id)return obj;
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	public boolean updateRole(ErsRole obj){
+		try {
+			String query;
+			if(obj.getRole()==0||obj.getTitle()==null){
+				System.out.println("Role Parameters are Invalid");
+				return false;
+			}
+			query = "UPDATE ERS_USER_ROLES SET USER_ROLE=? WHERE ERS_USER_ROLE_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, obj.getTitle());
+			pstmt.setInt(2, obj.getRole());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}	
+	public boolean deleteRole(ErsRole obj){throw new UnsupportedOperationException();}
+	public List<ErsRole> getAllRoles(){
+		List<ErsRole> trackList = new ArrayList<ErsRole>();
+		try {
+			String query = "SELECT * FROM ERS_USER_ROLES";
+			ResultSet rs;
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while(rs.next()){
+				ErsRole obj = new ErsRole(
+						rs.getInt(columns.getProperty("roleId")),
+						rs.getString(columns.getProperty("roleName")));
+				trackList.add(obj);
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return trackList;
+	}
+	
+	//Status feature calls
+	public boolean createStat(ErsStatus obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getStatus()==null){
+				System.out.println("Status Parameters are Invalid");
+				return false;
+			}
+			query = "INSERT INTO ERS_REIMBURSEMENT_STATUS VALUES(?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, obj.getId());
+			pstmt.setString(2, obj.getStatus());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+	public ErsStatus retrieveStat(int id){
+		try{
+			String query = "SELECT * FROM ERS_REIMBURSEMENT_STATUS WHERE REIMB_STATUS_ID = ?";
+			ResultSet rs;
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ErsStatus obj = new ErsStatus(
+						rs.getInt(columns.getProperty("statId")),
+						rs.getString(columns.getProperty("statName")));
+				if(obj.getId()==id)return obj;
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	public boolean updateStat(ErsStatus obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getStatus()==null){
+				System.out.println("Status Parameters are Invalid");
+				return false;
+			}
+			query = "UPDATE ERS_REIMBURSEMENT_STATUS SET REIMB_STATUS=? WHERE REIMB_STATUS_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, obj.getStatus());
+			pstmt.setInt(2, obj.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}	
+	public boolean deleteStat(ErsStatus obj){throw new UnsupportedOperationException();}
+	public List<ErsStatus> getAllStats(){
+		List<ErsStatus> trackList = new ArrayList<ErsStatus>();
+		try {
+			String query = "SELECT * FROM ERS_REIMBURSEMENT_STATUS";
+			ResultSet rs;
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while(rs.next()){
+				ErsStatus obj = new ErsStatus(
+						rs.getInt(columns.getProperty("statId")),
+						rs.getString(columns.getProperty("statName")));
+				trackList.add(obj);
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return trackList;
+	}
+	//Type feature calls
+	public boolean createType(ErsType obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getType()==null){
+				System.out.println("Type Parameters are Invalid");
+				return false;
+			}
+			query = "INSERT INTO ERS_REIMBURSEMENT_TYPE VALUES(?,?)";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, obj.getId());
+			pstmt.setString(2, obj.getType());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}
+	public ErsType retrieveType(int id){
+		try{
+			String query = "SELECT * FROM ERS_REIMBURSEMENT_TYPE WHERE REIMB_TYPE_ID = ?";
+			ResultSet rs;
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				ErsType obj = new ErsType(
+						rs.getInt(columns.getProperty("typeId")),
+						rs.getString(columns.getProperty("typeName")));
+				if(obj.getId()==id)return obj;
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+	public boolean updateType(ErsType obj){
+		try {
+			String query;
+			if(obj.getId()==0||obj.getType()==null){
+				System.out.println("Type Parameters are Invalid");
+				return false;
+			}
+			query = "UPDATE ERS_REIMBURSEMENT_TYPE SET REIMB_TYPE=? WHERE REIMB_TYPE_ID=?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, obj.getType());
+			pstmt.setInt(2, obj.getId());
+			pstmt.executeUpdate();
+			conn.commit();
+			return true;
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return false;
+	}	
+	public boolean deleteType(ErsType obj){throw new UnsupportedOperationException();}
+	public List<ErsType> getAllTypes(){
+		List<ErsType> trackList = new ArrayList<ErsType>();
+		try {
+			String query = "SELECT * FROM ERS_REIMBURSEMENT_TYPE";
+			ResultSet rs;
+			Statement stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while(rs.next()){
+				ErsType obj = new ErsType(
+						rs.getInt(columns.getProperty("typeId")),
+						rs.getString(columns.getProperty("typeName")));
+				trackList.add(obj);
+			}
+		} catch (Throwable e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return trackList;
+	}
+}

@@ -1,0 +1,48 @@
+@CHARSET "ISO-8859-1";
+body{
+	background-color: red;
+}
+.main{
+	background-color: white;
+}
+.instructions{
+	position: absolute;
+	top: 5rem;
+	left: 28rem;
+	height: 10rem;
+	width: 30rem;
+	color: lime;
+	font-family: "Times New Roman", Georgia, Serif;
+	font-size: 1rem;
+}
+.hadouken{
+	background-image: url("../images/hadouken.gif");
+	position: absolute;
+	height: 10rem;
+	width: 10rem;
+	top: 13rem;
+	left: 35rem;
+	display: none;
+}
+.ryu-still,.ryu-ready,.ryu-cool,.ryu-throwing,.hadouken{
+	background: no-repeat;
+}
+.ryu-still,.ryu-ready,.ryu-cool,.ryu-throwing{
+	width: 40rem;
+	height: 31rem;
+}
+.ryu-ready,.ryu-cool,.ryu-throwing{
+	display: none;	
+}
+.ryu-still{
+	background-image: url("../images/ryu-standing-still.png");
+}
+.ryu-ready{
+	background-image: url("../images/ryu-ready-position.gif");
+}
+.ryu-cool{
+	background-image: url("../images/ryu-cool.gif");
+}
+.ryu-throwing{
+	background-image: url("../images/ryu-throwing-hadouken.png");
+}

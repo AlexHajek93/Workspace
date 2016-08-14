@@ -1,0 +1,26 @@
+package com.revature.servlet;
+
+public class Cryption {
+	private static final int KEY1 = 5;
+	
+	public String encrypt(String passwd){
+		char[] split = passwd.toCharArray();
+		passwd = "";
+		for(char c:split){
+			c+=KEY1;
+			System.out.println(c);
+			passwd += c;
+		}
+		return passwd;
+	}
+	public String decrypt(String cryption){
+		char[] split = cryption.toCharArray();
+		cryption = "";
+		for(char c:split){
+			c-=KEY1;
+			System.out.println(c);
+			cryption += c;
+		}
+		return cryption;
+	}
+}

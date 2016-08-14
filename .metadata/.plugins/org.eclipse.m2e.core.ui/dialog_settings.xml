@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectWizardArtifactPage">
+		<list key="groupId">
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+	<section name="org.jboss.tools.project.examples.stacksrequirements">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+		<list key="ciManagementUrl">
+		</list>
+		<list key="ciManagementSystem">
+		</list>
+		<list key="issueManagementSystem">
+		</list>
+		<list key="issueManagementUrl">
+		</list>
+	</section>
+	<section name="MavenProjectWizardArchetypePage">
+		<item value="http://repo1.maven.org/maven2/" key="catalog"/>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="MavenProjectWizardLocationPage">
+		<list key="location">
+			<item value="C:\Users\Alex\workspace\ERS_Web"/>
+			<item value="C:\Users\Alex\workspace\ERS_Web\WebContent\state.jsp"/>
+		</list>
+		<list key="projectNameCombo">
+			<item value="jboss-javaee-multi"/>
+		</list>
+		<list key="packageCombo">
+			<item value="org.jboss.tools.example"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="Maven2ProjectWizardArchifactPage">
+		<list key="package">
+			<item value="org.ims.IMS_WEB"/>
+			<item value="org.revature.IMS"/>
+			<item value="org.IMS"/>
+			<item value="org.jboss.tools.example"/>
+			<item value="com.revature.Hibernate"/>
+			<item value="com.revature.demo"/>
+			<item value="com.revature.log4j"/>
+			<item value="com.revature.maven"/>
+		</list>
+		<list key="groupId">
+			<item value="org.ims"/>
+			<item value="org.revature"/>
+			<item value="org.IMS"/>
+			<item value="org.jboss.tools.example"/>
+			<item value="com.revature"/>
+		</list>
+		<list key="artifactId">
+			<item value="IMS_WEB"/>
+			<item value="IMS"/>
+			<item value="jboss-javaee-multi"/>
+			<item value="Hibernate"/>
+			<item value="demo"/>
+			<item value="log4j"/>
+			<item value="Maven"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+		<list key="version">
+			<item value="0.0.1-SNAPSHOT"/>
+		</list>
+	</section>
+</section>

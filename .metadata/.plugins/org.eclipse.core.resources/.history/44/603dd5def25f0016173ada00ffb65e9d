@@ -1,0 +1,39 @@
+package com.revature.beans;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="OUP_STUDENT")
+public class Classroom {
+	private int id;
+	private int roomNumber;
+	private String building;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+	public String getBuilding() {
+		return building;
+	}
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+	public Classroom() {
+		super();
+	}
+	public Classroom(int id, int roomNumber, String building) {
+		super();
+		this.id = id;
+		this.roomNumber = roomNumber;
+		this.building = building;
+	}
+	
+}

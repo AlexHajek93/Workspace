@@ -1,0 +1,14 @@
+package com.revature.app;
+
+import java.util.Date;
+
+import com.revature.Hibernate.DataLayer;
+import com.revature.beans.Employee;
+
+public class AppTier {
+	public static void main(String[] args) {
+		Employee object = new Employee(1,"Dan","Pickles",20000,new Date(),true);
+		DataLayer dataServiceLayer = new DataLayer();
+		data
+	}
+}

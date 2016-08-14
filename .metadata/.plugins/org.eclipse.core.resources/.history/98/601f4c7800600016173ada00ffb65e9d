@@ -1,0 +1,14 @@
+package com.revature.Session;
+
+import org.hibernate.Session;
+
+import com.revature.Hibernate.SessionFactoryManager;
+import com.revature.beans.Student;
+
+public class Loading {
+	public static void main(String[] args) {
+		Session session = SessionFactoryManager.getInstance().openSession();
+		Student alpha = (Student) session.get(Student.class, 47);
+		System.out.println(alpha);
+	}
+}

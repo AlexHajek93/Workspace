@@ -1,0 +1,28 @@
+package com.revature.Hibernate;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.revature.beans.Employee;
+
+//Delegate design
+//Entry point between middle tier and back-end
+public class DataLayer {
+	private Session session;//Session-per-request
+	private HibDAO dao;
+	
+	public DataLayer() {
+		session = SessionFactoryManager.getInstance().openSession();
+		dao = new HibDAO(session);
+	}
+	
+	public void close(){
+		if(session!=null) session.close();
+	}
+
+	public void createRecord(Employee obj){
+		Transaction tx = session.beginTransaction();
+		dao.insert(obj);
+		tx.commit();
+	}
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html><!--  Hypertext Markup Language -->
+<head><!--  Info about the page 'metadata' -->
+<!-- Internal Styling:  CSS(Cascading Style Sheets) -->
+<meta charset="ISO-8859-1">
+<title>This is a Web page</title>
+<style>
+h1{/*element selector*/
+color: red;
+background-color: black;
+text-shadow: 20px 20px aqua;
+font-size: 3EM;
+}
+/*Class selector*/
+.square{
+list-style-type: square
+}
+.abc{
+color: aqua;
+}
+/*id selector*/
+#pt1{
+	background-color: yellow;
+}
+</style>
+</head>
+<body><!-- visible to the user-->
+	<h1>Header</h1>
+	<button>Press me</button><br/>
+	<text>Hi</text> Hi <br/>
+	<a href="http:/www.google.com">Search the Web</a><!-- HTTP GET request -->
+	<!-- HyperText Transfer Protocol -->
+	<p></p><!-- paragraph -->
+	<p></p>
+	<table>
+		<tr><td>T</td><td>H</td></tr>
+		<tr><td>I</td><td>S</td></tr>
+	</table>
+	<div style="color: "><!-- in-line styling -->
+	<p>asdfasdf</p>
+	<ul>
+		<li class="square abc" id="pt1">1</li>
+		<li class="square">2</li>
+		<li>3</li>
+	</ul>
+	<h2>Sub</h2>
+	<ol>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+	</ol>
+	</div><!-- division container seperate content -->
+	<form action="" metod="POST"><!-- action=where form is processed/method=HTTP method to use -->
+		<label for="var1">Name:</label>
+		<input type="text" name="var1" placeholder="John Smith"/><br />
+		Interests:<br/>
+		<input type="checkbox" name="interests" value="S"/>Swimming <br/>
+		<input type="checkbox" name="interests" value="H"/>Running <br/>
+		<input type="checkbox" name="interests" value="R"/>Hiking <br/>
+		<input type="checkbox" name="interests" value="Z"/>Sleeping <br/>
+		Gender: Male <input type="radio"name="gender"value="M"> 
+		Female <input type="radio"name="gender"value="F"><br/>
+		Date of Birth: <input type="date"name="birthdate"><br/>
+		State: <select name="st">
+			<option value="VA">VA</option><!-- Populate from DB -->
+			<option value="MN">MN</option>
+			<option value="NY">NY</option>
+			<option value="MD">MD</option>
+		</select><br/>
+		Bio:<br/> <textarea rows="10" cols="20" name="bio"></textarea><br/>
+		<input type="submit"value="Submit"><br/>
+		<span>Span</span><!-- Like a div,but doesn't take entire page(no line break) -->
+		<span>Span2</span>
+	</form>
+</body>
+</html>

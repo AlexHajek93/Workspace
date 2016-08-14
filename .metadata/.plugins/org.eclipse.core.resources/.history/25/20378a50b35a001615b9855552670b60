@@ -1,0 +1,15 @@
+package com.revature.servlet;
+
+import javax.servlet.ServletException;
+
+import ers.dao.ErsDAO;
+
+public class ServletHelper extends HttpServlet{
+	private ErsDAO dao;
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+		dao = new ErsDAO();
+	}
+}

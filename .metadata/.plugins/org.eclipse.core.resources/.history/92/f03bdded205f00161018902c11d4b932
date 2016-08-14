@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+var showDeny = function(){
+	document.getElementById("Denied").style.visibility = "visible";
+	document.getElementById("Approved").style.visibility = "hidden";
+	document.getElementById("Pending").style.visibility = "hidden";
+}
+
+var showPending = function(){
+	$("Denied").css("visibility","visible");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}
+
+var showApproved = function(){
+	$("Denied").css("visibility","visible");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}

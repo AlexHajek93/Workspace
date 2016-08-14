@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/javax.jdo.jdo2-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/javax.javaee-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/wls-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.servlet.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.xml.registry.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.bea.core.weblogic.web.api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/org.glassfish.web.javax.servlet.jsp.jstl.jar">
+   <libraries>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+   </libraries>
+  </path>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/api.jar"/>
+ </paths>
+ <validation>
+  <el>
+   <linked-el length="9" name="%0" offset="1222" path="%1"/>
+   <linked-el length="12" name="%2" offset="1314" path="%1"/>
+   <linked-el length="27" name="%3" offset="2078" path="%1"/>
+   <linked-el length="11" name="%4" offset="1267" path="%1"/>
+   <linked-el length="14" name="%5" offset="1779" path="%1"/>
+   <linked-el length="22" name="%5" offset="1567" path="%1"/>
+   <linked-el length="14" name="%5" offset="1662" path="%1"/>
+   <linked-el length="14" name="%5" offset="1482" path="%1"/>
+   <linked-el length="22" name="%5" offset="1385" path="%1"/>
+   <linked-el length="18" name="%6" offset="1904" path="%1"/>
+   <linked-el length="26" name="%6" offset="1948" path="%1"/>
+   <linked-el length="26" name="%7" offset="1948" path="%1"/>
+   <linked-el length="18" name="%8" offset="525" path="%9"/>
+   <linked-el length="18" name="%10" offset="1904" path="%1"/>
+   <linked-el length="27" name="%10" offset="2078" path="%1"/>
+   <linked-el length="26" name="%10" offset="1948" path="%1"/>
+   <linked-el length="10" name="%11" offset="495" path="%9"/>
+   <linked-el length="11" name="%12" offset="818" path="%13"/>
+   <linked-el length="11" name="%12" offset="464" path="%9"/>
+   <linked-el length="18" name="%14" offset="525" path="%9"/>
+   <linked-el length="18" name="%15" offset="525" path="%9"/>
+   <linked-el length="10" name="%15" offset="495" path="%9"/>
+   <linked-el length="9" name="%16" offset="1222" path="%1"/>
+   <linked-el length="11" name="%16" offset="1267" path="%1"/>
+   <linked-el length="14" name="%16" offset="1779" path="%1"/>
+   <linked-el length="12" name="%16" offset="1314" path="%1"/>
+   <linked-el length="18" name="%16" offset="1904" path="%1"/>
+   <linked-el length="22" name="%16" offset="1567" path="%1"/>
+   <linked-el length="14" name="%16" offset="1662" path="%1"/>
+   <linked-el length="27" name="%16" offset="2078" path="%1"/>
+   <linked-el length="26" name="%16" offset="1948" path="%1"/>
+   <linked-el length="14" name="%16" offset="1482" path="%1"/>
+   <linked-el length="22" name="%16" offset="1385" path="%1"/>
+   <linked-el length="25" name="%17" offset="488" path="%1"/>
+   <linked-el length="16" name="%17" offset="1175" path="%1"/>
+  </el>
+ </validation>
+ <aliases>
+  <alias path="t.id" value="%0"/>
+  <alias path="t.major" value="%2"/>
+  <alias path="t.skill.coolnessFactor" value="%3"/>
+  <alias path="/JSTL/WebContent/skillbox.jsp" value="%9"/>
+  <alias path="/JSTL/WebContent/home.jsp" value="%13"/>
+  <alias path="t.name" value="%4"/>
+  <alias path="t.salary" value="%5"/>
+  <alias path="t.skill.skill" value="%6"/>
+  <alias path="J2EE" value="%7"/>
+  <alias path="s.value" value="%8"/>
+  <alias path="t.skill" value="%10"/>
+  <alias path="s.key" value="%11"/>
+  <alias path="skills" value="%12"/>
+  <alias path="s.value.skill" value="%14"/>
+  <alias path="s" value="%15"/>
+  <alias path="t" value="%16"/>
+  <alias path="/JSTL/WebContent/trainees.jsp" value="%1"/>
+  <alias path="traineeList" value="%17"/>
+ </aliases>
+ <includes/>
+ <uris/>
+</kb-project>

@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+input{
+	min-width: 82px;
+	
+}
+#bodyStyle{
+	text-align: center;
+	background-image: url("./back.png");
+	background-size: 60%;
+}
+#txtbox{
+	min-width: 150px;
+}

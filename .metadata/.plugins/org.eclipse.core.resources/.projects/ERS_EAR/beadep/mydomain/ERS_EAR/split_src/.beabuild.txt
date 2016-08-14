@@ -1,0 +1,4 @@
+C\:/Users/Alex/workspace/ERS_EAR/EarContent/APP-INF/classes = APP-INF/classes
+C\:/Users/Alex/workspace/ERS_Web/WebContent = ERS_Web.war
+C\:/Users/Alex/workspace/.metadata/.plugins/org.eclipse.core.resources/ERS_Web/build/weboutput = ERS_Web.war
+C\:/Users/Alex/workspace/ERS_Web/build/classes = ERS_Web.war/WEB-INF/classes

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/javax.jdo.jdo2-api.jar"/>
+  <path value="C:/Users/Alex/workspace/JSON/jackson-annotations-2.7.3.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/javax.javaee-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/wls-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.servlet.jar"/>
+  <path value="C:/Users/Alex/workspace/JSON/jackson-core-2.7.3.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.xml.registry.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.bea.core.weblogic.web.api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/org.glassfish.web.javax.servlet.jsp.jstl.jar">
+   <libraries>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+    <library class="tld"/>
+   </libraries>
+  </path>
+  <path value="C:/Users/Alex/workspace/JSON/jackson-databind-2.7.3.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/api.jar"/>
+ </paths>
+ <validation>
+  <core validator-id="jsf-verification"/>
+  <core validator-id="jboss.cdi.core"/>
+  <core validator-id="batch-verification"/>
+  <el/>
+ </validation>
+ <aliases/>
+ <includes/>
+ <uris/>
+</kb-project>

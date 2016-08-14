@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+#googleTip{
+}
+</style>
+</head>
+<body>
+Practice JavaScript Task
+<script type="text/javascript" src="./resources/js/JavaScriptClass.js">
+<script type="text/javascript">
+//Check GitHub
+function tool(event){
+	document.getElementById('googleTip').style.visibility = hidden;
+	var x = event.clientX -25;
+	var y = event.clientY -25;
+	document.getElementById('googleTip').style.left = x + "px";
+	document.getElementById('googleTip').style.top = y + "px";
+	setTimeout(toolOff, 2000);
+}
+function toolOff(){
+	document.getElementById('googleTip').style.visibility = hidden;
+}
+</script>
+<br/>
+<input type="number"/ id="txtbox"><br>
+<input type="number"/ id="conbox" placeholder="0"><br>
+<input type="submit" id="submit" value="Submit"><br/>
+<ul id="ulbody" style="list-style-type: none;"></ul>
+</body>
+</html>

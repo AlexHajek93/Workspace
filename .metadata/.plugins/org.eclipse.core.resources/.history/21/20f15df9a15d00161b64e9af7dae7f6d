@@ -1,0 +1,7 @@
+package com.revature.maven;
+
+import junit.framework.TestCase;
+
+public class AppTest_JUnit4 extends TestCase {
+
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>JSTL</display-name>
+  <welcome-file-list>
+    <welcome-file>home.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  	<servlet-name>alpha</servlet-name>
+  	<servlet-class>com.revature.servlet.TraineeServlet</servlet-class>
+  	<init-param>
+  		<description>The jndi name of the Trainee Database</description>
+  		<param-name>datasource</param-name>
+  		<param-value>database/demo</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>alpha</servlet-name>
+  	<url-pattern>insertTrainee.do</url-pattern>
+  </servlet-mapping>
+  <context-param>
+  	<description>The host url</description>
+  	<param-name>hostURL</param-name>
+  	<param-value>http://trainee.revature.com/</param-value>
+  </context-param>
+</web-app>

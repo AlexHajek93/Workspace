@@ -1,0 +1,23 @@
+package com.revature.Hibernate;
+
+import org.hibernate.Session;
+
+import com.revature.beans.Employee;
+
+public class HibDAO {
+	private Session session;
+		
+	public HibDAO() {
+		super();
+	}
+
+	public HibDAO(Session session) {
+		super();
+		this.session = session;
+	}
+
+	public void insert(Object obj){
+		session.save(obj);
+	}
+	
+}

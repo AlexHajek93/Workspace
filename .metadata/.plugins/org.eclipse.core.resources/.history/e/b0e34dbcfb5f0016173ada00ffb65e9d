@@ -1,0 +1,32 @@
+package com.revature.Hibernate;
+
+import java.util.*;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.revature.beans.*;
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+//	public static void main(String[] args) {
+//		Employee object = new Employee(1,"Dan","Pickles",20000,new Date(),true);
+//		DataLayer dataServiceLayer = new DataLayer();
+//		dataServiceLayer.createRecord(object);
+//	}
+	
+	private Session session;
+	public static void main(String[] args) {
+		App app = new App();
+		app.session = SessionFactoryManager.getInstance().openSession();
+		Transaction tx = app.session.beginTransaction();
+		Teacher teacher = new Teacher(1,"Bill Gates","CS",null,new Classroom(1,205,"John Hancock"));
+		Set<Textbook> books = new HashSet<Textbook>();
+		Textbook headFirst = new Textbook(1,"6541189764531","Head First Java","Dan Pickles",2005,null);
+		books.add(headFirst);
+		Course java = new Course(1,"Intro to Java",3,null,teacher,books);
+	}
+}

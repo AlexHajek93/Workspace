@@ -1,0 +1,19 @@
+package com.revature.Hibernate;
+
+import org.hibernate.Session;
+
+import com.revature.beans.Employee;
+
+//Delegate design
+//Entry point between middle tier and back-end
+public class DataLayer {
+	private Session session;//Session-per-request
+	
+	public DataLayer() {
+		session = SessionFactoryManager.getInstance();
+	}
+
+	public void createRecord(Employee obj){
+		
+	}
+}

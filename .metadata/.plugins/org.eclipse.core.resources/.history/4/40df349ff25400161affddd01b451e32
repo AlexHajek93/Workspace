@@ -1,0 +1,12 @@
+package ers.app;
+
+import ers.dao.ErsDAO;
+
+public class App {
+	public static void main(String[] args) {
+		ErsDAO dao = new ErsDAO();
+		dao.retrieveRole(1);
+		dao.retrieveRole(2);
+	}
+	
+}

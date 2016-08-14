@@ -1,0 +1,9 @@
+package com.revature.Hibernate;
+
+public class HibDAO {
+	
+	public void insert(Employee obj){
+		
+	}
+	
+}

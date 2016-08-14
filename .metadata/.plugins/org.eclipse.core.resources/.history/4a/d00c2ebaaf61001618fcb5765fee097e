@@ -1,0 +1,74 @@
+package org.ims.IMS_WEB;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.ims.beans.AddressBean;
+import org.ims.beans.ClientBean;
+import org.ims.beans.ClientTypeBean;
+import org.ims.beans.ProductBean;
+import org.ims.beans.ProductCategoryBean;
+import org.ims.beans.StateAbbrvBean;
+
+public class IMSDAO {
+	private Session session;
+	
+	public IMSDAO() {
+		super();
+	}
+	
+	public IMSDAO(Session session) {
+		super();
+		this.session = session;
+	}
+	
+	public void create(Object obj){
+		session.save(obj);
+	}
+	public Object retrieve(Object obj){
+		Object returnObj;
+		String hql = "from org.ims.beans.";
+		switch(obj.getClass().getName()){
+		case "AddressBean":
+		case "ClientBean":
+		case "ClientTypeBean":
+			
+		case "ProductBean":
+		case "ProductCategoryBean":
+		case "StateAbbrvBean":hql+=obj.getClass().getName()+" where ";break;
+		default:break;
+		}
+		switch(obj.getClass().getName()){
+		case "AddressBean":hql+="addressId";break;
+		case "ClientBean":hql+="clientId";break;
+		case "ClientTypeBean":hql+="clientTypeId";break;
+		
+		case "ProductBean":hql+="productUPC";break;
+		case "ProductCategoryBean":hql+="categoryId";break;
+		case "StateAbbrvBean":hql+="arrvId";break;
+		default:break;
+		}
+		hql +=":=param1";
+		Query query = session.createQuery(hql);
+		switch(obj.getClass().getName()){
+		case "AddressBean":query.setInteger("param1",((AddressBean)obj).getAddressId());break;
+		case "ClientBean":query.setInteger("param1",((ClientBean)obj).getId());break;
+		case "ClientTypeBean":query.setInteger("param1",((ClientTypeBean)obj).getClientTypeId());break;
+			
+		case "ProductBean":query.setInteger("param1",((ProductBean)obj).getProductUPC());break;
+		case "ProductCategoryBean":query.setInteger("param1",((ProductCategoryBean)obj).getCategoryId());break;
+		case "StateAbbrvBean":query.setInteger("param1",((StateAbbrvBean)obj).getArrvId());break;
+		default:break;
+		}
+		
+		switch(obj.getClass().getName()){
+		case "AddressBean":query.setInteger("param1",((AddressBean)obj).getAddressId());break;
+		case "ClientBean":query.setInteger("param1",((ClientBean)obj).getId());break;
+		case "ClientTypeBean":query.setInteger("param1",((ClientTypeBean)obj).getClientTypeId());break;
+			
+		case "ProductBean":query.setInteger("param1",((ProductBean)obj).getProductUPC());break;
+		case "ProductCategoryBean":query.setInteger("param1",((ProductCategoryBean)obj).getCategoryId());break;
+		case "StateAbbrvBean":query.setInteger("param1",((StateAbbrvBean)obj).getArrvId());break;
+		default:break;
+		}
+	}
+}

@@ -1,0 +1,8 @@
+package ers.app;
+
+import ers.dao.ErsDAO;
+
+public class App {
+	ErsDAO dao = new ErsDAO();
+	
+}

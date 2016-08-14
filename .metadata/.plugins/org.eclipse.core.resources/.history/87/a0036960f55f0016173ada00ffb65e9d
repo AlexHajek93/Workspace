@@ -1,0 +1,67 @@
+package com.revature.beans;
+
+import java.util.Set;
+
+import javax.persistence.*;
+
+public class Course {
+	private int id;
+	private String name;
+	private int credits;
+	private Teacher instructor;
+	
+	//Mappings
+	@ManyToMany(cascade=CascadeType.ALL)
+	private Set<Student> students;
+
+	private Set<Textbook> materials;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getCredits() {
+		return credits;
+	}
+	public void setCredits(int credits) {
+		this.credits = credits;
+	}
+	public Set<Student> getStudents() {
+		return students;
+	}
+	public void setStudents(Set<Student> students) {
+		this.students = students;
+	}
+	public Teacher getInstructor() {
+		return instructor;
+	}
+	public void setInstructor(Teacher instructor) {
+		this.instructor = instructor;
+	}
+	public Set<Textbook> getMaterials() {
+		return materials;
+	}
+	public void setMaterials(Set<Textbook> materials) {
+		this.materials = materials;
+	}
+	public Course() {
+		super();
+	}
+	public Course(int id, String name, int credits, Set<Student> students, Teacher instructor, Set<Textbook> materials) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.credits = credits;
+		this.students = students;
+		this.instructor = instructor;
+		this.materials = materials;
+	}
+	
+}

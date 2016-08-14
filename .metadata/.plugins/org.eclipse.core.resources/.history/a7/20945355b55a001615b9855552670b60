@@ -1,0 +1,130 @@
+package com.revature.servlet;
+
+import java.io.IOException;
+import java.sql.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import ers.beans.ErsReimbursement;
+import ers.beans.ErsRole;
+import ers.beans.ErsStatus;
+import ers.beans.ErsType;
+import ers.beans.ErsUser;
+import ers.dao.ErsDAO;
+
+public class ServletHelper extends HttpServlet{
+	private ErsDAO dao;
+	private ErsUser info;
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		super.init();
+		dao = new ErsDAO();
+	}
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		this.doPost(req, resp);
+	}
+	public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		if((info = dao.retrieveUser(req.getParameter("user")))!=null){
+			if(info.getPassword().equals(req.getParameter("pass")))
+				System.out.println(info.getRole().getRole());
+				if(info.getRole().getRole()!=2){
+					System.out.println("password match");
+					req.getSession().setAttribute("userid", info.getId());
+					req.getSession().setAttribute("username", info.getFname());
+					req.getSession().setAttribute("userRole", info.getRole().getRole());
+					resp.sendRedirect("page.jsp");
+				}
+				else if(info.getRole().getRole()==2){
+					System.out.println("password match");
+					req.getSession().setAttribute("userid", info.getId());
+					req.getSession().setAttribute("username", info.getFname());
+					req.getSession().setAttribute("userRole", info.getRole().getRole());
+					resp.sendRedirect("page.jsp");
+				}
+			else{
+				System.out.println("password failed");
+				req.getSession().setAttribute("loginFail", "Login failed, I guess you don't know who you are...");
+				resp.sendRedirect("login.jsp");
+			}
+		}else{
+		System.out.println("password failed");
+		req.setAttribute("loginFail", "Login failed, I guess you don't know who you are...");
+		resp.sendRedirect("login.jsp");
+		}
+	}
+	public void logout(HttpServletRequest req, HttpServletResponse resp){
+		req.getSession().setAttribute("userRole", 0);
+		req.getSession().invalidate();
+		resp.sendRedirect("reimburse.jsp");
+	}
+	public void ureg(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+	//Needs work
+		info = new ErsUser();
+		info.setId(1);
+		info.setUsername(req.getParameter("user"));
+		info.setPassword(req.getParameter("pass"));
+		info.setFname(req.getParameter("fname"));
+		info.setLname(req.getParameter("lname"));
+		info.setEmail(req.getParameter("email"));
+		info.setRole(new ErsRole(1,""));
+		System.out.println("creating user...");
+		System.out.println(info);
+		if(dao.createUser(info)){
+			req.getSession().setAttribute("userid", info.getId());
+			req.getSession().setAttribute("username", info.getFname());
+			req.getSession().setAttribute("userRole", info.getRole().getRole());
+			resp.sendRedirect("page.jsp");
+		}else{
+			System.out.println("registration failed");
+			req.setAttribute("regFail", "Registration failed, Try again or don't...");
+			resp.sendRedirect("ureg.jsp");
+		}
+	}
+	public void stateChange(HttpServletRequest req, HttpServletResponse resp,int role,int state) throws IOException{
+		switch(role){
+		case 1:
+			req.getSession().setAttribute("ustate", state);
+			break;
+		case 2:
+			req.getSession().setAttribute("mstate", state);
+			break;
+		}
+		resp.sendRedirect("state.jsp");
+	}
+	public void nstat(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		if(dao.createStat(new ErsStatus(1,req.getParameter("newstat"))))
+			resp.sendRedirect("page.jsp"); 
+		else
+			resp.sendRedirect("state.jsp");
+	}
+	public void ntype(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		if(dao.createType(new ErsType(1,req.getParameter("newtype"))))
+			resp.sendRedirect("page.jsp"); 
+		else
+			resp.sendRedirect("state.jsp"); 
+	}
+	public void nrole(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		if(dao.createRole(new ErsRole(1,req.getParameter("newrole"))))
+			resp.sendRedirect("page.jsp"); 
+		else
+			resp.sendRedirect("state.jsp");
+	}
+	public void nreim(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		if(dao.createReim(new ErsReimbursement(1, Integer.parseInt(req.getParameter("amount")), new Date(1), new ErsUser((int)req.getSession().getAttribute("userid"), "", "", "", "", "", new ErsRole(1, "")), new ErsStatus(1, "Pending"), new ErsType())))
+			resp.sendRedirect("page.jsp");
+		else
+			resp.sendRedirect("page.jsp");
+	}
+	public void creim(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		//Needs work
+		resp.sendRedirect("page.jsp");
+	}
+	public void process(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		resp.sendRedirect("page.jsp");
+	}
+}

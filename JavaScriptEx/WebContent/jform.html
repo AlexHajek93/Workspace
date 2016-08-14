@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register Validation</title>
+</head>
+<body>
+First Name: <input type="text" id="fname"/><span></span><br/>
+Last Name: <input type="text" id="lname"/><span></span><br/>
+Age: <input type="text" id="age"/><span id="ageV"></span><br/>
+<input id="radio" type="radio" checked="checked">
+<button id="submit" disabled>Register</button>
+</body>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js">
+</script>
+<script>
+$("#age").keyup(function(){
+	var age = $("#age").val();
+	if(isNaN(age)){
+		$("#ageV").text("Bad");
+		$("#ageV").css("color","red");
+	}else{
+		if(age > 100){
+			$("#ageV").text("WTH");
+			$("#ageV").css("color","red");
+			$("#submit").attr("disabled",true)
+		}else{
+			$("#ageV").text("OK");
+			$("#ageV").css("color","green");
+			$("#submit").attr("disabled",false)
+		}
+	}
+})
+</script>
+</html>

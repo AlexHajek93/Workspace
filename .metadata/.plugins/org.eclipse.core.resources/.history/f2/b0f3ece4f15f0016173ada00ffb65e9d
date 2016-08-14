@@ -1,0 +1,11 @@
+package com.revature.beans;
+
+import java.util.Set;
+
+public class Teacher {
+	private int id;
+	private String name;
+	private String department;
+	private Set<Course> assinedCourses;
+	private Classroom classroom;
+}

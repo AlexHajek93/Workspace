@@ -1,0 +1,56 @@
+package org.ims.beans;
+
+import java.util.Set;
+
+import javax.persistence.*;
+
+
+@Entity
+@Table(name="IMS_CLIENT_TYPE")
+public class ClientTypeBean {
+	
+	@Id
+	@Column(name="CLIENT_TYPE_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int clientTypeId;
+	@Column(name="client_Type")
+	private String clientType;
+	
+	@OneToMany(mappedBy="clientTypeId")
+	private Set<ClientBean> ClientSet;
+
+	public int getClientTypeId() {
+		return clientTypeId;
+	}
+
+	public void setClientTypeId(int clientTypeId) {
+		this.clientTypeId = clientTypeId;
+	}
+
+	public String getClientType() {
+		return clientType;
+	}
+
+	public void setClientType(String clientType) {
+		this.clientType = clientType;
+	}
+
+	public Set<ClientBean> getClientSet() {
+		return ClientSet;
+	}
+
+	public void setClientSet(Set<ClientBean> clientSet) {
+		ClientSet = clientSet;
+	}
+
+	public ClientTypeBean() {
+		super();
+	}
+
+	public ClientTypeBean(int clientTypeId, String clientType, Set<ClientBean> clientSet) {
+		super();
+		this.clientTypeId = clientTypeId;
+		this.clientType = clientType;
+		ClientSet = clientSet;
+	}
+}

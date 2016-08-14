@@ -1,0 +1,4 @@
+#Logger config
+log4j.rootLogger=INFO,CONSOLE
+
+#Appender config

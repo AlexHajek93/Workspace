@@ -1,0 +1,22 @@
+package com.revature.Session;
+
+import org.hibernate.Session;
+
+import com.revature.Hibernate.SessionFactoryManager;
+import com.revature.beans.Student;
+
+public class Loading {
+	public static void main(String[] args) {
+		Session session = SessionFactoryManager.getInstance().openSession();
+		//Using get will return null with invalid
+		Student alpha = (Student) session.get(Student.class, 47);
+		//Using load will give error with invalid id
+		//Load is faster tho...
+		//Student alpha = (Student) session.load(Student.class, 47);
+		
+		//HQL
+		String sql = "SELECT * FROM UOP_STUDENT WHERE STUDENT_ID=?";
+		String hql = "FROM UOP_STUDENT WHERE STUDENT_ID=?";
+		System.out.println(alpha);
+	}
+}

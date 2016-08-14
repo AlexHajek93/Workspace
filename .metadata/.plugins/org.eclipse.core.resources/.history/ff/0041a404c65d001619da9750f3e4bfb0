@@ -1,0 +1,39 @@
+@CHARSET "ISO-8859-1";
+form { 
+text-align: center;
+margin: auto;
+}
+p {
+	text-align: center;
+	margin: auto;
+}
+#imagerev{
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+	background-color: none;
+	border-color: none;
+	width: 15%;
+	height: 15%;
+}
+.centerItems{margin: auto;}
+.revcolor{color: rgb(242,107,37)}
+.colorblack{color: black}
+.widthSetter{min-width: 150px}
+#maincolor{color: rgb(242,107,37)}
+#homecolor{color: rgb(242,107,37)}
+#reimcolor{color: rgb(242,107,37)}
+#faqcolor{color: rgb(242,107,37)}
+#contcolor{color: rgb(242,107,37)}
+#blackback{background-color: black;}
+#blackbody{background-color: black;}
+#center{style="text-align: center;"}
+.buttonstyle{
+	color: black;
+	background-color: silver;
+	min-width: 300px;
+	min-height: 10px;
+}
+.hidden{
+	visibility: hidden;	
+}

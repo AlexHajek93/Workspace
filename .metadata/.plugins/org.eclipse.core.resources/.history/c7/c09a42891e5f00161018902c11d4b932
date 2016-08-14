@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+$(document).ready(function(){
+	$('.reim_table').DataTable();
+});
+
+var showDeny = function(){
+	$("Denied").css("visibility","visible");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}
+
+var showPending = function(){
+	$("Denied").css("visibility","visible");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}
+
+var showApproved = function(){
+	$("Denied").css("visibility","visible");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}

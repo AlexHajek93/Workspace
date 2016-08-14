@@ -1,0 +1,23 @@
+package org.ims.beans;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="IMS_PURCHASE_ORDER")
+public class PurchaseOrderBean {
+	@Id
+	@Column(name="ORDER_NUMBER")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int orderNum;
+	@Column(name="SUBTOTAL")
+	private String subtotal;
+	@Column(name="PURCHASE_DATE")
+	private String purchaseDate;
+	@Column(name="TAX_AMOUNT")
+	private String taxAmount;
+	@Column(name="PO_TOTAL")
+	private int poTotal;
+	@ManyToOne
+	@JoinColumn(name="CLIENT_ID")
+	private ClientBean client;
+}

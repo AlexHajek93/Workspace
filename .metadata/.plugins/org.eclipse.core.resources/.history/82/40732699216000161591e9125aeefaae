@@ -1,0 +1,213 @@
+package com.revature.servlet;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import ers.beans.ErsReimbursement;
+import ers.beans.ErsRole;
+import ers.beans.ErsStatus;
+import ers.beans.ErsType;
+import ers.beans.ErsUser;
+import ers.dao.ErsDAO;
+
+public class MasterServlet extends HttpServlet{
+	private ErsDAO dao;
+	private ServletHelper helper;
+	Cryption crypt = new Cryption();
+	private final int MANAGER=2;
+	private final int USER=2;
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		dao = new ErsDAO();
+		helper = new ServletHelper();
+		this.getServletContext().setAttribute("list", new ArrayList<ErsReimbursement>());
+		this.getServletContext().setAttribute("mlist", new ArrayList<ErsReimbursement>());
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		this.doPost(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ErsUser info;
+		switch(req.getRequestURI()){
+		case "/ERS_Web/login.do": 
+			if((info = dao.retrieveUser(req.getParameter("user")))!=null){
+				if(crypt.decrypt(info.getPassword()).equals(req.getParameter("pass")))
+					if(info.getRole().getRole()!=2){
+						req.getSession().setAttribute("userid", info.getId());
+						req.getSession().setAttribute("username", info.getFname());
+						req.getSession().setAttribute("userRole", info.getRole().getRole());
+						resp.sendRedirect("page.jsp");
+					}
+					else if(info.getRole().getRole()==2){
+						req.getSession().setAttribute("userid", info.getId());
+						req.getSession().setAttribute("username", info.getFname());
+						req.getSession().setAttribute("userRole", info.getRole().getRole());
+						resp.sendRedirect("page.jsp");
+					}
+				else{
+					req.getSession().setAttribute("loginFail", "Login failed, I guess you don't know who you are...");
+					resp.sendRedirect("login.jsp");
+				}
+			}else{
+			req.setAttribute("loginFail", "Login failed, I guess you don't know who you are...");
+			}
+			resp.sendRedirect("login.jsp");
+			break;
+		case "/ERS_Web/ureg.do": 
+			//Needs work
+			info = new ErsUser();
+			info.setId(1);
+			info.setUsername(req.getParameter("user"));
+			info.setPassword(crypt.encrypt(req.getParameter("pass")));
+			info.setFname(req.getParameter("fname"));
+			info.setLname(req.getParameter("lname"));
+			info.setEmail(req.getParameter("email"));
+			info.setRole(new ErsRole(1,""));
+			System.out.println("creating user...");
+			System.out.println(info);
+			if(dao.createUser(info)){
+				req.getSession().setAttribute("userid", info.getId());
+				req.getSession().setAttribute("username", info.getFname());
+				req.getSession().setAttribute("userRole", info.getRole().getRole());
+				resp.sendRedirect("page.jsp");
+			}else{
+				System.out.println("registration failed");
+				req.setAttribute("regFail", "Registration failed, Try again or don't...");
+				resp.sendRedirect("ureg.jsp");
+			}
+			break;
+		case "/ERS_Web/mstate1.do": 
+			req.getSession().setAttribute("mstate", 1);
+			resp.sendRedirect("state.jsp"); 
+			break;
+		case "/ERS_Web/mstate2.do": 
+			req.getSession().setAttribute("mstate", 2);
+			resp.sendRedirect("state.jsp"); 
+			break;
+		case "/ERS_Web/mstate3.do": 
+			req.getSession().setAttribute("mstate", 3);
+			resp.sendRedirect("state.jsp"); 
+			break;
+		case "/ERS_Web/mstate4.do": 
+			req.getSession().setAttribute("mstate", 4);
+			List<ErsReimbursement> mlist = (ArrayList<ErsReimbursement>) req.getServletContext().getAttribute("list");
+			mlist.clear();
+			for(ErsReimbursement e:dao.getAllReims()){
+				mlist.add(e);
+			}
+			resp.sendRedirect("state.jsp"); 
+			break;
+		case "/ERS_Web/ustate1.do": 
+			req.getSession().setAttribute("ustate", 1);
+			resp.sendRedirect("state.jsp"); 
+			break;
+		case "/ERS_Web/ustate2.do": 
+			req.getSession().setAttribute("ustate", 2);
+			List<ErsReimbursement> list = (ArrayList<ErsReimbursement>) req.getServletContext().getAttribute("list");
+			list.clear();
+			for(ErsReimbursement e:dao.getAllReims((int)req.getSession().getAttribute("userid"))){
+				list.add(e);
+			}
+			resp.sendRedirect("state.jsp"); 
+			break;
+		case "/ERS_Web/nstat.do": 
+			if(dao.createStat(new ErsStatus(1,req.getParameter("newstat"))))
+				resp.sendRedirect("page.jsp"); 
+			else
+				resp.sendRedirect("state.jsp");
+			break;
+		case "/ERS_Web/ntype.do": 
+			if(dao.createType(new ErsType(1,req.getParameter("newtype"))))
+				resp.sendRedirect("page.jsp"); 
+			else
+				resp.sendRedirect("state.jsp"); 
+			break;
+		case "/ERS_Web/nrole.do": 
+			if(dao.createRole(new ErsRole(1,req.getParameter("newrole"))))
+				resp.sendRedirect("page.jsp"); 
+			else
+				resp.sendRedirect("state.jsp");
+			break;
+		case "/ERS_Web/goBack.do":
+			resp.sendRedirect("page.jsp");
+			break;
+		case "/ERS_Web/nreim.do": 
+			int typeid=1;
+			System.out.println(req.getParameter("type"));
+			if(req.getParameter("type")!=null){
+				List<ErsType> typeList = dao.getAllTypes();
+				for(ErsType obj: typeList){
+					System.out.println(obj.getType());
+					if(req.getParameter("type").equals(obj.getType())){
+						typeid = obj.getId();
+						break;
+					}
+				}
+			}
+			if(dao.createReim(new ErsReimbursement(1, 
+					Integer.parseInt(req.getParameter("amount")), 
+					new Date(1), 
+					new ErsUser((int)req.getSession().getAttribute("userid")," "," "," "," "," ",new ErsRole(1, " ")),
+					new ErsStatus(1, "Pending"),
+					new ErsType(typeid,""))))
+				resp.sendRedirect("page.jsp");
+			else{
+				resp.sendRedirect("page.jsp");
+			}
+			break;
+		case "/ERS_Web/logout.do":
+			req.getSession().setAttribute("userRole", 0);
+			req.getSession().invalidate();
+			resp.sendRedirect("reimburse.jsp");
+			break;
+		case "/ERS_Web/approve.do": 
+			System.out.println(" ");
+			int id_a = Integer.parseInt(req.getParameter("reim_id"));
+			int resolver_a = (int)req.getSession().getAttribute("userid");
+			int approve = 2;
+			dao.updateStatus(id_a, resolver_a, approve);
+			resp.sendRedirect("page.jsp"); 
+			break;
+		case "/ERS_Web/deny.do": 
+			int id_d = Integer.parseInt(req.getParameter("reim_id"));
+			int resolver_d = (int)req.getSession().getAttribute("userid");
+			int deny = 3;
+			dao.updateStatus(id_d, resolver_d, deny);
+			resp.sendRedirect("page.jsp"); 
+			break;
+		case "/ERS_Web/test.do":
+			//Experimental does nothing atm
+			//Environment set as Test.jsp button
+			resp.sendRedirect("Test.jsp"); 
+			break;
+//		case "/ERS_Web/login.do": helper.login(req, resp); break;
+//		case "/ERS_Web/ureg.do": helper.ureg(req, resp); break;
+//		case "/ERS_Web/mstate1.do": helper.stateChange(req, resp, MANAGER, 1); break;
+//		case "/ERS_Web/mstate2.do": helper.stateChange(req, resp, MANAGER, 2); break;
+//		case "/ERS_Web/mstate3.do": helper.stateChange(req, resp, MANAGER, 3); break;
+//		case "/ERS_Web/mstate4.do": helper.stateChange(req, resp, MANAGER, 4); break;
+//		case "/ERS_Web/ustate1.do": helper.stateChange(req, resp, USER, 1); break;
+//		case "/ERS_Web/ustate2.do": helper.stateChange(req, resp, USER, 1); break;
+//		case "/ERS_Web/nstat.do": helper.nstat(req, resp); break;
+//		case "/ERS_Web/ntype.do": helper.ntype(req, resp); break;
+//		case "/ERS_Web/nrole.do": helper.nrole(req, resp); break;
+//		case "/ERS_Web/process.do": helper.process(req, resp); break;
+//		case "/ERS_Web/nreim.do": helper.nreim(req, resp); break;
+//		case "/ERS_Web/creim.do": helper.creim(req, resp); break;
+//		case "/ERS_Web/logout.do": helper.logout(req, resp); break;
+		default: throw new IllegalArgumentException("Invalid URI");
+		}
+	}
+}

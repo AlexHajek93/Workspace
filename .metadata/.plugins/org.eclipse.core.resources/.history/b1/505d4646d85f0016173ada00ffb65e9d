@@ -1,0 +1,11 @@
+package com.revature.Hibernate;
+
+public class SessionFactoryManager {
+	
+	private static SessionFactory sf;
+	
+	public SessionFactoryManager() {
+		super();
+	}
+	
+}

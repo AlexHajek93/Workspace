@@ -1,0 +1,43 @@
+package org.ims.IMS_WEB;
+
+import org.hibernate.Session;
+
+public class IMSDAO {
+	private Session session;
+	
+	public IMSDAO() {
+		super();
+	}
+	
+	public IMSDAO(Session session) {
+		super();
+		this.session = session;
+	}
+	
+	public void create(Object obj){
+		session.save(obj);
+	}
+	public void retrieve(Object obj){
+		String hql = "from org.ims.beans.";
+		switch(obj.getClass().getName()){
+		case "AddressBean":
+		case "ClientBean":
+		case "ClientTypeBean":
+		case "ProductBean":
+		case "ProductCategoryBean":
+		case "StateAbbrvBean":hql+=obj.getClass().getName()+" where ";break;
+		default:break;
+		}
+		hql += " where ";
+		switch(obj.getClass().getName()){
+		case "AddressBean":hql+="";break;
+		case "ClientBean":hql+="";break;
+		case "ClientTypeBean":hql+="";break;
+		case "ProductBean":hql+="";break;
+		case "ProductCategoryBean":hql+="";break;
+		case "StateAbbrvBean":hql+="";break;
+		default:break;
+		}
+		
+	}
+}

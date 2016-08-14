@@ -1,0 +1,22 @@
+package org.ims.IMS_WEB;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.revature.Hibernate.HibDAO;
+import com.revature.Hibernate.SessionFactoryManager;
+import com.revature.beans.Employee;
+
+public class DataLayer {
+	private Session session;//Session-per-request
+	private IMSDAO dao;
+	
+	public DataLayer() {
+		session = SessionFactoryManager.getInstance().openSession();
+		dao = new IMSDAO(session);
+	}
+	
+	public void close(){
+		if(session!=null) session.close();
+	}
+}

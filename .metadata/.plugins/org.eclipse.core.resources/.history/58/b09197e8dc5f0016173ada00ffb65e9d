@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.revature.beans.Employee" table="HIBERNATE_EMPLOYEE">
+		<id name="id"><!-- Bean property --> 
+			<column name="EMPLOYEE_ID"></column><!-- table column -->
+			<generator class="sequence" /><!-- default: HIBERNATE_SEQUENCE -->
+		</id>
+		<property name="firstName" type="java.lang.String"><column name="FIRST_NAME"></column></property>
+		<property name="lastName" type="java.lang.String"><column name="LAST_NAME"></column></property>
+		<property name="salary" type="double"><column name="SALARY"></column></property>
+		<property name="hireDate" type="java.util.Date"><column name="HIRE_DATE"></column></property>
+		<property name="active" type="boolean"><column name="ACTIVE"></column></property>
+	</class>
+</hibernate-mapping>

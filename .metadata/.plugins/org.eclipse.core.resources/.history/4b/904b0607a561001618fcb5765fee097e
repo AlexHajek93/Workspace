@@ -1,0 +1,31 @@
+package org.ims.beans;
+
+import java.util.Set;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="CLIENT")
+public class ClientBean {
+	@Id
+	@Column(name="CLIENT_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	@Column(name="CLIENT_NAME")
+	private String name;
+	@Column(name="CLIENT_EMAIL")
+	private String email;
+	@Column(name="POINT_OF_CONTACT_NAME")
+	private String pocn;
+	@Column(name="CLIENT_PHONE")
+	private String phone;
+	@Column(name="CLIENT_FAX")
+	private String fax;
+	
+//Mappings
+	@OneToOne(mappedBy="instructor")
+	private Set<Course> assinedCourses;
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="ADDRESS_ID")
+	private AddressBean address;
+}

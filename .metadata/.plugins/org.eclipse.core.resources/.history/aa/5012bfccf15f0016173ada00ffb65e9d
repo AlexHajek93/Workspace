@@ -1,0 +1,12 @@
+package com.revature.beans;
+
+import java.util.Set;
+
+public class Textbook {
+	private int id;
+	private String isbn;
+	private String title;
+	private String author;
+	private int publishYear;
+	private Set<Course> courses;
+}

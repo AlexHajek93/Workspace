@@ -1,0 +1,19 @@
+package com.revature.Hibernate;
+
+import org.hibernate.SessionFactory;
+
+public class SessionFactoryManager {
+	
+	private static SessionFactory sf;
+	
+	private SessionFactoryManager() {
+		super();
+	}
+	
+	public static synchronized SessionFactory getInstance(){
+		if(sf==null){
+			
+		}
+		return sf;
+	}
+}

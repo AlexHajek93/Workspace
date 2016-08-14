@@ -1,0 +1,21 @@
+/**
+ * 
+ */
+var showDeny = function(){
+	var rows = document.getElementsByClassName("trow");
+	for(var i =0, il = rows.length;i<il;i++){
+		rows[i].className += " hidden";
+	}
+}
+
+var showPending = function(){
+	$("Denied").css("visibility","visible");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}
+
+var showApproved = function(){
+	$("Denied").css("visibility","visible");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}

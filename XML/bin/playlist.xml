@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Comment: data about the music in playlist -->
+<playlist><!-- Root element (tag) -->
+	<name>Mix Tape</name>
+	<year>2016</year>
+	<track>
+		<title>Rainman</title>
+		<artist>Eminem</artist>
+	</track>
+	<track>
+		<title>Harvest of Sorrow</title>
+		<artist>Metallica</artist>
+	</track>
+	<track>
+		<title>Ring of Fire</title>
+		<artist>Johnny Cash</artist>
+	</track>
+	<track>
+		<title>Doomblade</title>
+		<artist>Acacia Strain</artist>
+	</track>
+</playlist>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/javax.jdo.jdo2-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/javax.javaee-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/wls-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.servlet.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.xml.registry.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.bea.core.weblogic.web.api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/org.glassfish.web.javax.servlet.jsp.jstl.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/c-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/c-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/c.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fmt-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fmt-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fmt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fn.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/permittedtaglibs.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/scriptfree.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/sql-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/sql-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/sql.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/x-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/x-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/x.tld" project="ERS_Web"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/api.jar"/>
+ </paths>
+ <validation>
+  <el>
+   <linked-el length="53" name="%0" offset="461" path="%1"/>
+   <linked-el length="18" name="%2" offset="382" path="%1"/>
+   <linked-el length="26" name="%2" offset="612" path="%1"/>
+   <linked-el length="26" name="%2" offset="543" path="%1"/>
+   <linked-el length="53" name="%3" offset="461" path="%1"/>
+   <linked-el length="18" name="%4" offset="382" path="%1"/>
+   <linked-el length="26" name="%4" offset="612" path="%1"/>
+   <linked-el length="26" name="%4" offset="543" path="%1"/>
+   <linked-el length="24" name="%5" offset="465" path="%6"/>
+   <linked-el length="14" name="%5" offset="503" path="%6"/>
+   <linked-el length="53" name="%7" offset="461" path="%1"/>
+  </el>
+ </validation>
+ <aliases>
+  <alias path="pageContext.servletContext.contextPath" value="%0"/>
+  <alias path="loggedIn.role" value="%2"/>
+  <alias path="pageContext" value="%3"/>
+  <alias path="loggedIn" value="%4"/>
+  <alias path="loginFail" value="%5"/>
+  <alias path="/Filter/WebContent/login.jsp" value="%6"/>
+  <alias path="pageContext.servletContext" value="%7"/>
+  <alias path="/Filter/WebContent/home.jsp" value="%1"/>
+ </aliases>
+ <includes/>
+ <uris>
+  <uri value="http://java.sun.com/jsp/jstl/core">
+   <prefix>c</prefix>
+  </uri>
+ </uris>
+</kb-project>

@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+$(document).ready(function(){
+	$('.reim_table').DataTable();
+});
+
+var showDeny = function(){
+	$("Denied").css("visibility","show");
+	$("Approved").css("visibility","hidden");
+	$("Pending").css("visibility","hidden");
+}

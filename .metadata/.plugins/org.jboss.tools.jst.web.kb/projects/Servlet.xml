@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kb-project>
+ <depends-on-projects/>
+ <used-by-projects/>
+ <paths>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/javax.jdo.jdo2-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/javax.javaee-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/wls-api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.servlet.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.oracle.weblogic.xml.registry.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/com.bea.core.weblogic.web.api.jar"/>
+  <path value="C:/REV/wls/wls1221/wlserver/modules/org.glassfish.web.javax.servlet.jsp.jstl.jar">
+   <libraries>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/c-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/c-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/c.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fmt-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fmt-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fmt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/fn.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/permittedtaglibs.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/scriptfree.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/sql-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/sql-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/sql.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/x-1_0-rt.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/x-1_0.tld" project="ERS_Web"/>
+    </library>
+    <library class="tld">
+     <id class="model-object"
+      path="FileSystems/lib-org.glassfish.web.javax.servlet.jsp.jstl.jar/meta-inf/x.tld" project="ERS_Web"/>
+    </library>
+   </libraries>
+  </path>
+  <path value="C:/REV/wls/wls1221/wlserver/server/lib/api.jar"/>
+ </paths>
+ <validation>
+  <el/>
+ </validation>
+ <aliases/>
+ <includes/>
+ <uris/>
+</kb-project>

@@ -1,0 +1,18 @@
+package com.revature.Hibernate;
+
+import java.util.Date;
+
+import com.revature.beans.Employee;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+	public static void main(String[] args) {
+		Employee object = new Employee(1,"Dan","Pickles",20000,new Date(),true);
+		DataLayer dataServiceLayer = new DataLayer();
+		dataServiceLayer.createRecord(object);
+	}
+}

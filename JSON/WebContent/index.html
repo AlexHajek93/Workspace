@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>Get by Id</h2>
+ID: <input type="text" id="query"/>
+<button id="get">Get</button><button id="getall">GetAll</button>
+<div id="outer"></div>
+<hr/>
+<h2>Post</h2>
+ID: <input type="text" id="id"/>
+Name: <input type="text" id="name"/>
+Major: <input type="text" id="major"/>
+<button id="post">Get</button>
+<h2>
+<table>
+<!-- $.each(i,item) -->
+</table>
+</h2>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#getall").click(function(){
+		$.each(i,item).ajax({
+			method:"GET",
+			url:"http://localhost:7001/JSON/ajax/getall",
+			success:function(response){
+				var trainee = JSON.parse(response);
+				$("#output").text("Id:"+trainee.id+"Name:"+trainee.name+"Major:"+trainee.major)
+			}
+		});
+	})
+	$("#post").click(function(){
+		var t_id = $("#id").val();
+		var t_name = $("#name").val();
+		var t_major = $("#major").val();
+		$("#id").val("");
+		$("#name").val("");
+		$("#major").val("");
+		$.ajax({
+			method:"POST",
+			url:"http://localhost:7001/JSON/ajax/post",
+			data: JSON.stringify({id:t_id,name:t_name,major:t_major}),
+			success:function(response){
+				alert("Great Stuff!");
+			}
+		})
+	})
+	
+	$("#get").click(function(){
+		var id =$("#query").val();
+		$.ajax({
+			method:"GET",
+			url:"http://localhost:7001/JSON/ajax/get?query="+id,
+			success:function(response){
+				var trainee = JSON.parse(response);
+				$("#output").text("Id:"+trainee.id+"Name:"+trainee.name+"Major:"+trainee.major)
+			}
+		});
+	})
+});
+</script>
+</html>
